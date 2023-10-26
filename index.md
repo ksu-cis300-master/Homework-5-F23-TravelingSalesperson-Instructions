@@ -16,7 +16,7 @@ Create a GitHub repository using the link provided on the Canvas assignment, and
 
 ## 3. User Interface
 
-The program should look and behave exactly like the model solution to Homework 3, except that it should typically take less time for larger sets of points.
+The program should look and behave exactly like the model solution to Homework 3, except that it should typically take less time for larger sets of points. For this reason, no demo video is provided.
 
 ## 4. Improvements to the Shortest Circuit Algorithm
 
@@ -51,10 +51,10 @@ Suppose that instead of simply using the path length plus the distance from poin
 
 To summarize this lower bound calculation, let:
 
-- *p* be the length of the current path;
-- *R* be the set of remaining points;
 - *u* be the starting point of the current path;
 - *v* be the ending point of the current path;
+- *p* be the length of the current path;
+- *R* be the set of remaining points;
 - *d*(*a*, *b*) be the distance from point *a* to point *b* if *a* &ne; *b*, or &infin; otherwise.
 
 We then define the lower bound to be:
@@ -87,15 +87,15 @@ When the loop terminates, the current node will contain a complete circuit, and 
 
 ## 5. Software Architecture
 
-The following class diagram shows the architecture of the program:
+The following class diagram shows the software architecture of the program:
 
 ![The software architecture](ClassDiagram.png)
 
-The **UserInterface** and **DrawingCanvas** classes are the same as for Homework 3. The **TreeNode** class implements a single immutable node of the state space tree. The **CircuitFinder** class is used for the same purpose as for Homework 3; however, the **FindShortestCircuit** method will implement the branch and bound algorithm, and much of the logic from the **FinishShortestCircuit** method will be moved to the **TreeNode** class.
+The **UserInterface** and **DrawingCanvas** classes are the same as for Homework 3 - you will not need to modify them. The **TreeNode** class implements a single immutable node of the state space tree. The **CircuitFinder** class is used for the same purpose as for Homework 3; however, the **FindShortestCircuit** method will implement the branch and bound algorithm, and much of the logic from the **FinishShortestCircuit** method will be moved to the **TreeNode** class.
 
 ## 6. Coding Requirements
 
-In what follows, we give specific coding requirements for the **TreeNode** and **CircuitFinder** classes. The names of most of your fields, properties, and methods don't need to match those shown in the diagram, as long as they follow the [style requirements](https://cis300.cs.ksu.edu/appendix/style/). In order for the unit test code to work, however, the **public** methods in the **CircuitFinder** and **TreeNode** classes must have the names shown in the diagram. In some cases, you are required to break the code into additional **private** methods that are not described. In deciding what code to put into other methods, consider how you can use additional methods to avoid duplicating code or to shorten what would otherwise be a long method.
+In what follows, we give specific coding requirements for the **TreeNode** and **CircuitFinder** classes. The names of most of your fields, properties, and methods don't need to match those shown in the diagram, as long as they follow the [style requirements](https://cis300.cs.ksu.edu/appendix/style/). In order for the unit test code to work, however, the **public** properties and methods in the **CircuitFinder** and **TreeNode** classes must have the names shown in the diagram. In some cases, you are required to break the code into additional **private** methods that are not described. In deciding what code to put into other methods, consider how you can use additional methods to avoid duplicating code or to shorten what would otherwise be a long method.
 
 While most of the coding requirements for the **CircuitFinder** class are described in [Section 6.2. The CircuitFinder Class](#62-the-circuitfinder-class), we'll mention here that you will need to add to that class a **public static readonly int** field defining the minimum number of points (3) through which a circuit can be found. Use this constant in both the **CircuitFinder** class and the **TreeNode** class to avoid using the literal 3.
 
@@ -109,7 +109,7 @@ You will need to include the following **private readonly** fields:
 
 - A **Point[&nbsp;]** giving the points through which the circuit is to be found.
 - A **double[,]** giving the distances between each pair of points; i.e., the element in row *i* and column *j* gives the distance between the points at locations *i* and *j* of the above array. The elements along the main diagonal (i.e., where the two indices are the same) should contain **double.PositiveInfinity**. This array allows us to avoid recalculating the same distances over and over.
-- An **int[&nbsp;]** giving the indices (into the first array above) of the sequence of points in the path to this node. For example, if this array contains two elements, 7 and 3, then the path to this node contains the point at location 7 of **Point[&nbsp;]**, followed by the point at location 3 of that array. Storing indices, rather than points, in this array and the next allows us to avoid rearranging the elements in the above array.
+- An **int[&nbsp;]** giving the indices (into the first array above) of the sequence of points in the path to this node. For example, if this array contains two elements, 7 and 3, then the path to this node contains the point at location 7 of the **Point[&nbsp;]**, followed by the point at location 3 of that array. Storing indices, rather than points, in this array and the next allows us to avoid rearranging the elements in the above array of distances.
 - An **int[&nbsp;]** giving the indices of the points not contained in the path to this node.
 - A **double** giving the length of the path to this node.
 - A **bool** indicating whether all circuits should be found (i.e., if this value is **false**, then no descendant of this node should contain point 0 unless it is preceded by point 1 somewhere in the path from this node to that descendant).
@@ -144,7 +144,7 @@ This property should be of type **Point[&nbsp;]**. It should get the path repres
 
 #### 6.1.7. A public Children property
 
-This property should be of type **List\<TreeNode\>**. It should get a list of the children of this node. Do **not** use the default implementation; instead, use a block of code to build the list you need to return. If this node stores a complete circuit, the list returned should be empty. Otherwise, follow the same logic as the code to set up the recursive calls within the **CircuitFinder.FinishShortestCircuit** for Homework 3 - each child corresponds to a recursive call.  Note that you should not change the contents of any of the fields. Instead, build new arrays and use the **private** constructor to construct each node. Make use of an array's **CopyTo** method and/or the **Array.Copy** method as appropriate.
+This property should be of type **List\<TreeNode\>**. It should get a list of the children of this node. Do **not** use the default implementation; instead, use a block of code to build the list you need to return. If this node stores a complete circuit, the list returned should be empty. Otherwise, follow the same logic as the code to set up the recursive calls within the **CircuitFinder.FinishShortestCircuit** method for Homework 3 - each child corresponds to a recursive call.  Note that you should not change the contents of any of the fields. Instead, build new arrays and use the **private** constructor to construct each node. Make use of an array's **CopyTo** method and/or the **Array.Copy** method as appropriate.
 
 ### 6.2. The CircuitFinder Class
 
@@ -163,7 +163,7 @@ For the **TreeNode** class, most of the tests are done using the **TestChildren*
 
 It then checks that the **Children** property of the given parent node gives the correct number of children, each of whose properties (except the **Children** property) give the correct values.
 
-The actual test methods within **TreeNodeTests** set up the calls to the **TestChildren** method using the **GetList** method, which takes an **int** parameter `n` and produces a **List\<Point\>** containing the first `n` points from the array `_points`. Some of the tests use the **GetChild** method to extract from a **List\<TreeNode\>**  a node whose path ends in a given point. This is useful for getting a specific child of a node.
+The actual test methods within **TreeNodeTests** set up the calls to the **TestChildren** method using the **GetList** method, which takes an **int** parameter `n` and produces a **List\<Point\>** containing the first `n` points from the array `_points`. Some of the tests use the **GetChild** method to extract from a **List\<TreeNode\>** a node whose path ends in a given point. This is useful for getting a specific child of a node.
 
 Most of the tests of the **CirucuitFinder** class are done by the **TestGetShortestCircuit** method. It is passed an index into three arrays:
 
