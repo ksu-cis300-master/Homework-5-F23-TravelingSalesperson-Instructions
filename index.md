@@ -61,20 +61,19 @@ We then define the lower bound to be:
 $$
 p + \sum_{b \in R \cup \{u\}} \min \{d(a, b) \mid a \in R \cup \{v\}\}
 $$
-Note that if *R* is empty (i.e., if there are no remaining points), the summation has only one element, where *b* = *u* (the start of the path). Furthermore, the set within this element also contains only one element, *v* (the end of the path). Thus, in this case, the lower bound is *p* + *d*(*v*, *u*), which is the length of the complete circuit.
-
 Continuing with the above example, suppose our current path is simply \<3, 1\>, whose length is 500:
 
 <img src="4-point-ex3.png" alt="Another partial solution." style="zoom:100%;" />
 
-For the lower bound calculation, we need to consider points 0, 2, and 3 for the sum. For each of these, we need to find the minimum distance from points 0, 1, and 2. The lower bound is therefore the sum of:
+The starting point *u* in the path is 3, and the ending point *v* is 1. The length *p* of this path is 500. The set *R* of remaining points is \{0, 2\}. The lower bound is therefore 500 plus the sum over all *b* in \{0, 2, 3\} of min\{*d*(*a*, *b*) | *a* &isin; \{0, 1, 2\}\}. To evaluate the summation, we evaluate the term resulting from each possible value of *b*:
 
-- The current path length: 500
-- The minimum distance to 0: 400
-- The minimum distance to 2: 300
-- The minimum distance to 3: 300
+- *b* = 0: We then need the minimum of *d*(0, 0) = &infin;, *d*(1, 0) = 400, and *d*(2, 0) = 500. This minimum is 400.
+- *b* = 2: We need the minimum of *d*(0, 2) = 500, *d*(1, 2) = 300, and *d*(2, 2) = &infin;. This minimum is 300.
+- *b* = 3: We need the minimum of *d*(0, 3) = 300, *d*(1, 3) = 500, and *d*(2, 3) = 400. This minimum is 300.
 
-The sum is 1500 > 1400, so we can prune this path as well. Note that the original lower bound would have been 500 + 500 = 1000 < 1400, and pruning would not have been possible.
+The lower bound is therefore 500 + 400 + 300 + 300 = 1500 > 1400. We can therefore prune this path as well. Note that the original lower bound would have been 500 + 500 = 1000 < 1400, and pruning would not have been possible.
+
+Note that if *R* is empty (i.e., if there are no remaining points), the summation within the lower bound definition has only one term, where *b* = *u* (the start of the path). Furthermore, the set within this term also contains only one element, where *a* = *v* (the end of the path). Thus, in this case, the lower bound is *p* + *d*(*v*, *u*), which is the length of the complete circuit.
 
 ### 4.2. Branch and Bound
 
