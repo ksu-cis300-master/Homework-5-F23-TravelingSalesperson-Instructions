@@ -65,7 +65,11 @@ Continuing with the above example, suppose our current path is simply \<3, 1\>, 
 
 <img src="4-point-ex3.png" alt="Another partial solution." style="zoom:100%;" />
 
-The starting point *u* in the path is 3, and the ending point *v* is 1. The length *p* of this path is 500. The set *R* of remaining points is \{0, 2\}. The lower bound is therefore 500 plus the sum over all *b* in \{0, 2, 3\} of min\{*d*(*a*, *b*) | *a* &isin; \{0, 1, 2\}\}. To evaluate the summation, we evaluate the term resulting from each possible value of *b*:
+The starting point *u* in the path is 3, and the ending point *v* is 1. The length *p* of this path is 500. The set *R* of remaining points is \{0, 2\}. The lower bound is therefore 500 plus the sum over all *b* in \{0, 2, 3\} of 
+$$
+\min\{d(a, b) \mid a \in \{0, 1, 2\}\}.
+$$
+To evaluate the summation, we evaluate the term resulting from each possible value of *b*:
 
 - *b* = 0: We then need the minimum of *d*(0, 0) = &infin;, *d*(1, 0) = 400, and *d*(2, 0) = 500. This minimum is 400.
 - *b* = 2: We need the minimum of *d*(0, 2) = 500, *d*(1, 2) = 300, and *d*(2, 2) = &infin;. This minimum is 300.
