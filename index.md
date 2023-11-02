@@ -147,7 +147,7 @@ This property should be of type **Point[&nbsp;]**. It should get the path repres
 
 #### 6.1.7. A public Children property
 
-This property should be of type **List\<TreeNode\>**. It should get a list of the children of this node. Do **not** use the default implementation; instead, use a block of code to build the list you need to return. If this node stores a complete circuit, the list returned should be empty. Otherwise, follow the same logic as the code to set up the recursive calls within the **CircuitFinder.FinishShortestCircuit** method for Homework 3 - each child corresponds to a recursive call.  Note that you should not change the contents of any of the fields. Instead, build new arrays and use the **private** constructor to construct each node. Make use of an array's **CopyTo** method and/or the **Array.Copy** method as appropriate.
+This property should be of type **List\<TreeNode\>**. It should get a list of the children of this node. Do **not** use the default implementation; instead, use a block of code to build the list you need to return. If this node stores a complete circuit, the list returned should be empty. Otherwise, follow the same logic as the code to set up the recursive calls within the **CircuitFinder.FinishShortestCircuit** method for Homework 3 - each child corresponds to a recursive call.  Note that you should not change the contents of any of the fields. Instead, build new arrays and use the **private** constructor to construct each node. Make use of an array's **CopyTo** method and/or the **Array.Copy** method as appropriate. Note that new arrays will need to be constructed for each child - if you reuse arrays, each child will refer to the same array.
 
 ### 6.2. The CircuitFinder Class
 
